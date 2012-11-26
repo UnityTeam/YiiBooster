@@ -284,13 +284,17 @@ class TbEditableField extends CWidget
         }
 
 	    $bootstrap->registerAssetCss('bootstrap-editable.css') ;
-	    $bootstrap->registerAssetJs('bootstrap-editable' . (!YII_DEBUG ? '.min' : '') . '.js', CClientScript::POS_END);
+	    $bootstrap->registerAssetCss('bootstrap-toggle-buttons.css');
+        $bootstrap->registerAssetJs('bootstrap-editable' . (!YII_DEBUG && true==false ? '.min' : '') . '.js', CClientScript::POS_END);
 
         //include locale for datepicker
         if ($this->type == 'date' && $this->language && substr($this->language, 0, 2) != 'en') {
 
              $bootstrap->registerAssetJs('locales/bootstrap-datepicker.'. str_replace('_', '-', $this->language).'.js', CClientScript::POS_END);
         }
+        $bootstrap->registerAssetJs('jquery.toggle.buttons' . (!YII_DEBUG && true==false ? '.min' : '') . '.js', CClientScript::POS_END);
+        
+        //$bootstrap->registerAssetJs('bootstrap-editable-types' . (!YII_DEBUG && true==false ? '.min' : '') . '.js', CClientScript::POS_END);
     }
 
     public function run()

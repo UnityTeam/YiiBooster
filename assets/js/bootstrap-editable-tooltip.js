@@ -533,7 +533,7 @@
     $.fn.editableTooltip.types = {
         //for all types
         defaults:{
-            inputclass:'span2',
+            inputclass:'',
             placeholder:null,
             init:function (options) {},
             // this function called every time popover shown. Should set value of this.$input
