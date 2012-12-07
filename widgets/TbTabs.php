@@ -71,7 +71,7 @@ class TbTabs extends CWidget
 			$classes[] = 'tabs-'.$this->placement;
 
 		if (!empty($classes))
-		{
+		{	
 			$classes = implode(' ', $classes);
 			if (isset($this->htmlOptions['class']))
 				$this->htmlOptions['class'] .= ' '.$classes;
@@ -95,6 +95,7 @@ class TbTabs extends CWidget
 			'type'=>$this->type,
 			'encodeLabel'=>$this->encodeLabel,
 			'items'=>$items,
+			'htmlOptions' => array('id' => uniqid())
 		));
 		$tabs = ob_get_clean();
 
@@ -110,12 +111,12 @@ class TbTabs extends CWidget
 
 		/** @var CClientScript $cs */
 		$cs = Yii::app()->getClientScript();
-		$cs->registerScript(__CLASS__.'#'.$id, "jQuery('#{$id}').tab('show');");
+		$cs->registerScript(__CLASS__.'#'.$id, "$(function(){jQuery('#{$id}').tab('show');})",CClientScript::POS_END);
 
 		foreach ($this->events as $name => $handler)
 		{
 			$handler = CJavaScript::encode($handler);
-			$cs->registerScript(__CLASS__.'#'.$id.'_'.$name, "jQuery('#{$id}').on('{$name}', {$handler});");
+			$cs->registerScript(__CLASS__.'#'.$id.'_'.$name, "$(function(){jQuery('#{$id}').on('{$name}', {$handler});})",CClientScript::POS_END);
 		}
 	}
 
